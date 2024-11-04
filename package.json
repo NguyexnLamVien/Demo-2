@@ -1,0 +1,37 @@
+{
+  "name": "source",
+  "version": "1.0.0",
+  "description": "Init source",
+  "main": "src/server.ts",
+  "author": "Me",
+  "license": "MIT",
+  "scripts": {
+    "dev": "ts-node-dev --ignore-watch node_modules -r tsconfig-paths/register --respawn --transpile-only src/server.ts"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/compression": "^1.7.5",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/morgan": "^1.9.9",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "casbin": "^5.32.0",
+    "casbin-mongoose-adapter": "^5.3.1",
+    "compression": "^1.7.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.7.3",
+    "morgan": "^1.10.0",
+    "session-role-manager": "^0.0.2",
+    "tsconfig-paths": "^4.2.0"
+  }
+}
