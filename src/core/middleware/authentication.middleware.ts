@@ -15,7 +15,7 @@ const authenMiddleware = (req: any, res: Response, next: NextFunction): void => 
         req['userId'] = decoded.userId;
         next();
     } catch (error) {
-        throw new Forbidden('Invalid token');
+        next(error);
     }
 };
 
