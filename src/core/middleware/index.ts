@@ -1,8 +1,4 @@
 
-import { errorHandler } from '@core/middleware/errorHandler.middleware';
-import { authenMiddleware } from '@core/middleware/authentication.middleware';
-import { authorizationMiddleware } from './authorization.middleware';
-
-
-
-export { authorizationMiddleware, authenMiddleware, errorHandler };
+export { errorHandler } from '@core/middleware/handlerError.middleware';
+export { authenMiddleware } from '@core/middleware/authentication.middleware';
+export { closureFuntion } from './authorization.middleware';
