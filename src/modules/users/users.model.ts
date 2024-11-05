@@ -4,7 +4,7 @@ interface IUser extends Partial<WithID> {
   name: string;
   email: string;
   password: string;
-  courses: mongoose.Types.ObjectId[];
+  refreshToken?: string;
 }
 
 
@@ -12,7 +12,7 @@ const userSchema: Schema<IUser> = new Schema({
   name: { type: String, required: true, index: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  courses: [{ type: Schema.Types.ObjectId, ref: 'courses' }],
+  refreshToken: { type: String, default: null },
 }, {
   timestamps: true,
 });
