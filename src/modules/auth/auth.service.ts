@@ -1,6 +1,7 @@
-import { Conflict, NotFound, Unauthorized } from "@core/types/errorHandler";
+import { Conflict, NotFound, Unauthorized } from "@core/types/error.response";
 import { User } from "@modules/users/users.model";
 import { comparePassword, hashPassword } from "@modules/utils/bcrypt";
+import { generateAccessToken, generateRefreshToken } from "@modules/utils/generateToken";
 import jwt from 'jsonwebtoken';
 
 const registerUser = async (name: string, email: string, password: string) => {
@@ -18,8 +19,34 @@ const loginUser = async (email: string, password: string) => {
     const isMatch = await comparePassword(password, user.password);
     if (!isMatch) throw new Unauthorized('Invalid password');
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_TOKEN_SECRET!, { expiresIn: '1h' });
-    return { token, user };
+    const accessToken = generateAccessToken(user._id.toString());
+    const refreshToken = generateRefreshToken(user._id.toString());
+
+    await saveRefreshToken(user._id.toString(), refreshToken);
+
+    return { accessToken, user };
 };
 
-export default { registerUser, loginUser };
+const logoutUser = async (userId: string) => {
+    if (!userId) throw new NotFound('User not found');
+    return await User.findOneAndUpdate({ _id: userId }, { refreshToken: null }, { new: true });
+};
+
+const saveRefreshToken = async (userId: string, refreshToken: string): Promise<void> => {
+    await User.findOneAndUpdate({ _id: userId }, { refreshToken }, { new: true });
+};
+
+const refreshAccessToken = async (refreshToken: string) => {
+    const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET as string) as { userId: string };
+
+    const user = await User.findById(decoded.userId);
+    if (!user || user.refreshToken !== refreshToken) throw new Unauthorized('Invalid refresh token');
+
+    const newAccessToken = generateAccessToken(user._id.toString());
+
+    return { accessToken: newAccessToken };
+}
+
+
+
+export default { registerUser, loginUser, logoutUser, saveRefreshToken, refreshAccessToken };
