@@ -1,4 +1,4 @@
-app:
+  app:
   image: registry.gitlab.com/gift-me-a-song/auto-delpoy-with-docker:latest
   ports:
     - "3000:3000"
