@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import roleService from './role.service';
-import { Forbidden } from '@core/types/errorHandler';
+import { Forbidden } from '@core/types/error.response';
 
 const createRole = async (req: Request, res: Response, next: NextFunction) => {
     try {

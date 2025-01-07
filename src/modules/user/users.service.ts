@@ -1,7 +1,7 @@
 
-import { hashPassword, comparePassword } from '@modules/utils/bcrypt';
-import { User } from '@modules/users/users.model';
-import { Conflict, NotFound, Unauthorized } from '@core/types/errorHandler';
+import { hashPassword, comparePassword } from '@modules/util/bcrypt';
+import { User } from '@modules/user/users.model';
+import { Conflict, NotFound, Unauthorized } from '@core/types/error.response';
 
 
 const getAllUsers = async () => {

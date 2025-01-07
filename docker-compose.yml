@@ -1,0 +1,46 @@
+app:
+  image: registry.gitlab.com/gift-me-a-song/auto-delpoy-with-docker:latest
+  ports:
+    - "3000:3000"
+  restart: unless-stopped
+  env_file: .env
+
+# services:
+#   app:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     ports:
+#       - "5000:5000" # Mở cổng 5000 trên máy
+#     depends_on:
+#       - redis
+#       - mongo
+#       - rabbitmq
+#     environment:
+#       - REDIS_HOST=redis
+#       - MONGO_URI=mongodb://mongo:27017/test-source-base
+#       - RABBITMQ_URL=amqp://rabbitmq
+#     volumes:
+#       - .:/app # Gắn thư mục của bạn vào container để phát triển
+#       - /app/node_modules # Không gắn thư mục node_modules
+
+#   redis:
+#     image: redis:latest
+#     ports:
+#       - "6379:6379" # Redis sẽ lắng nghe trên cổng 6379
+
+#   mongo:
+#     image: mongo:latest
+#     ports:
+#       - "27017:27017" # MongoDB sẽ lắng nghe trên cổng 27017
+#     volumes:
+#       - mongo_data:/data/db # Tạo volume cho dữ liệu của MongoDB
+
+#   rabbitmq:
+#     image: rabbitmq:3-management
+#     ports:
+#       - "5672:5672"   # Cổng RabbitMQ cho kết nối AMQP
+#       - "15672:15672" # Cổng RabbitMQ cho giao diện quản lý
+
+# volumes:
+#   mongo_data:

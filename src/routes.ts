@@ -1,26 +1,20 @@
 import { Application } from "express";
-import userRouter from '@modules/users/users.route';
-import createUserRouter from '@feature/createProductByUser';
+import userRouter from '@modules/user/users.route';
 import authRouter from '@modules/auth/auth.route';
-import courseRouter from "@modules/courses/courses.route";
 import roleRouter from "@modules/role/role.route";
-import RoleCollection from "@modules/role/role.collection";
-import casbin from "@config/casbin";
+import productRouter from "@modules/product/products.route";
+import cartRouter from "@modules/cart/cart.route";
+import discountRouter from "@modules/discount/discount.route";
 
 const routes = async (app: Application) => {
     userRouter(app);
-    courseRouter(app);
-    createUserRouter(app);
+    productRouter(app);
     authRouter(app);
     roleRouter(app);
+    cartRouter(app);
+    discountRouter(app);
 
-    setTimeout(async () => {
-        try {
-            
-        } catch (error) {
-            console.error(error);
-        }
-    }, 1000);
+    // createUserRouter(app);
 
 }
 

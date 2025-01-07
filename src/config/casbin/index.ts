@@ -10,7 +10,7 @@ class Casbin {
 
   constructor() {
     this.init().then(() => {
-      console.log('Initialized casbin');
+      console.log('------------------Initialized casbin------------------');
     });
 
   }

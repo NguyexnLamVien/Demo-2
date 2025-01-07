@@ -1,33 +1,36 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 
-// bảo trì
+interface ResponseData {
+    message: string;
+    metadata?: any;
+}
+
 class SuccessResponse {
     public status: number;
     public message: string;
-    public data: any;
+    public metadata: any;
 
-    constructor(message: string, status: number, data: any = {}) {
-        this.message = message;
+    constructor({ message, metadata = {} }: ResponseData, status: number) {
         this.status = status;
-        this.data = this.data;
+        this.message = message;
+        this.metadata = metadata;
     }
 
     send(res: Response) {
-        return res.status(this.status).json({ message: this.message, data: this.data });
+        return res.status(this.status).json(this);
     }
 }
-
 
 class OK extends SuccessResponse {
-    constructor(message: string, data: any = {}) {
-        super(message, 200, data);
+    constructor({ message, metadata }: ResponseData) {
+        super({ message, metadata }, 200);
     }
 }
 
-class Created extends SuccessResponse {
-    constructor(message: string, data: any = {}) {
-        super(message, 201, data);
+class CREATED extends SuccessResponse {
+    constructor({ message, metadata }: ResponseData) {
+        super({ message, metadata }, 201);
     }
 }
 
-export { OK, Created };
+export { OK, CREATED };

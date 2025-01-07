@@ -3,8 +3,8 @@ import roleService from "@modules/role/role.service";
 
 const roleRouter = (app: Application) => {
 
-    const path = 'role';
-    app.post(`/${path}`,);
+    // const path = 'role';
+    // app.post(`/${path}`,);
 
 
 }
